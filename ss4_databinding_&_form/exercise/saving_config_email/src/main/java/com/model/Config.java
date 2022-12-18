@@ -2,11 +2,11 @@ package com.model;
 
 
 public class Config {
-    String name;
-    String languages;
-    int pageSize;
-    boolean filter;
-    String signature;
+    private String name;
+    private String languages;
+    private int pageSize;
+    private boolean filter;
+    private String signature;
 
     public Config(String name, String languages, int pageSize, boolean filter, String signature) {
         this.name = name;

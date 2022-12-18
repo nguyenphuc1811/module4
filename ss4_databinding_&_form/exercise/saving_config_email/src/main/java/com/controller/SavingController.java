@@ -1,23 +1,17 @@
 package com.controller;
 
 import com.model.Config;
-import com.service.ConfigService;
 import com.service.IConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
-@RequestMapping
 public class SavingController {
 
-
     @Autowired
-    IConfigService configService;
+    private IConfigService configService;
 
     @RequestMapping("")
     public String displayList(Model model) {

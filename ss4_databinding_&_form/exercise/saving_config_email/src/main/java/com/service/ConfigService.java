@@ -1,7 +1,6 @@
 package com.service;
 
 import com.model.Config;
-import com.repository.ConfigRepository;
 import com.repository.IConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ConfigService implements IConfigService{
 
     @Autowired
-    IConfigRepository configRepository;
+    private IConfigRepository configRepository;
 
     @Override
     public List<String> selectLanguages() {
