@@ -17,21 +17,26 @@
         <th>Content</th>
         <th>Date Created</th>
         <th>Category</th>
+        <th>Post</th>
         <th colspan="2"></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="blog, status : ${blogList}">
-        <td th:text="${status.count}"></td>
+    <tr th:each="blog, status : ${blogList.content}">
+        <td th:text="${status.count + blogList.number * blogList.size}"></td>
         <td th:text="${blog.title}"></td>
         <td th:text="${blog.writer}"></td>
         <td th:text="${blog.content}"></td>
         <td th:text="${blog.dateCreated}"></td>
         <td th:text="${blog.category}"></td>
+        <td th:text="${blog.post.name}"></td>
         <td><a th:href="@{/edit/__${blog.id}__}">Edit</a></td>
         <td><a th:href="@{/delete/__${blog.id}__}">Delete</a></td>
     </tr>
     </tbody>
 </table>
+<a th:href="@{/(page=${blogList.number -1})}" th:if="${blogList.hasPrevious()}">Previous</a>
+<span th:text="'Page ' + ${blogList.number + 1 + '/' + blogList.totalPages}"></span>
+<a th:href="@{/(page=${blogList.number +1})}" th:if="${blogList.hasNext()}">Next</a>
 </body>
 </html>

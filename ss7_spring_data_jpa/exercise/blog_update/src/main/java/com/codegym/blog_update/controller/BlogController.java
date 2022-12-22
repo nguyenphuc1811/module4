@@ -1,8 +1,12 @@
-package com.codegym.blog_managerment.controller;
+package com.codegym.blog_update.controller;
 
-import com.codegym.blog_managerment.model.Blog;
-import com.codegym.blog_managerment.service.IBlogService;
+import com.codegym.blog_update.model.Blog;
+import com.codegym.blog_update.repository.IPostRepository;
+import com.codegym.blog_update.service.IBlogService;
+import com.codegym.blog_update.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,31 +20,32 @@ public class BlogController {
     @Autowired
     private IBlogService iBlogService;
 
+    @Autowired
+    private IPostService iPostService;
+
     @GetMapping("")
-    public String display(Model model) {
-        model.addAttribute("blogList", iBlogService.findAll());
+    public String display(@PageableDefault(size = 3) Pageable pageable, Model model) {
+        model.addAttribute("blogList", iBlogService.findAll(pageable));
         return "home";
     }
 
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("blog", new Blog());
+        model.addAttribute("postList", iPostService.findAll());
         return "add";
     }
 
     @PostMapping("/addConfirm")
-    public String addBlog(Blog blog, Model model) {
-        if (iBlogService.update(blog)) {
-            model.addAttribute("mess", "Edit thành công");
-        } else {
-            model.addAttribute("mess", "Edit không thành công");
-        }
-        return display(model);
+    public String addBlog(Blog blog) {
+        iBlogService.add(blog);
+        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("blog", iBlogService.getById(id));
+        model.addAttribute("postList", iPostService.findAll());
         return "edit";
     }
 
@@ -57,12 +62,13 @@ public class BlogController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id, Model model) {
         model.addAttribute("blog", iBlogService.getById(id));
+        model.addAttribute("postList", iPostService.findAll());
         return "delete";
     }
 
     @PostMapping("/deleteConfirm")
-    public String deleteConfirm(Blog blog, Model model) {
+    public String deleteConfirm(Blog blog) {
         iBlogService.deleteById(blog.getId());
-        return display(model);
+        return "redirect:/";
     }
 }

@@ -1,7 +1,6 @@
-package com.codegym.blog_managerment.model;
+package com.codegym.blog_update.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Blog {
@@ -15,6 +14,16 @@ public class Blog {
     @Column(columnDefinition = "date")
     private String dateCreated;
     private String category;
+    @ManyToOne
+    private Post post;
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 
     public Blog() {
     }
