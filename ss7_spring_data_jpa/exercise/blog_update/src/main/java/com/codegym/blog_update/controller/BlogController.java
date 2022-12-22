@@ -7,6 +7,8 @@ import com.codegym.blog_update.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,12 +53,15 @@ public class BlogController {
 
     @PostMapping("/saveConfirm")
     public String editConfirm(Blog blog, RedirectAttributes attributes) {
-        if (iBlogService.update(blog)) {
-            attributes.addFlashAttribute("mess", "Edit thành công");
-        } else {
-            attributes.addFlashAttribute("mess", "Edit không thành công");
+        try {
+            if (iBlogService.update(blog)) {
+                attributes.addFlashAttribute("mess", "Edit thanh cong");
+            } else {
+                attributes.addFlashAttribute("mess", "Edit khong thanh cong");
+            }
+        } finally {
+            return "redirect:/";
         }
-        return "redirect:/";
     }
 
     @GetMapping("/delete/{id}")

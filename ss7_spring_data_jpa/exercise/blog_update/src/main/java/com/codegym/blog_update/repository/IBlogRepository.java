@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
     @Override
     Page<Blog> findAll(Pageable pageable);
+
+    Boolean existsByTitle(String title);
 }

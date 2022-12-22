@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
-import java.util.List;
 
 @Service
 public class BlogService implements IBlogService {
@@ -30,8 +29,8 @@ public class BlogService implements IBlogService {
 
     public boolean update(Blog blog) {
         try {
-            if (!iBlogRepository.existsById(blog.getId())) {
-                throw new SQLException();
+            if (iBlogRepository.existsByTitle(blog.getTitle())) {
+                throw new SQLException("Title is already exists");
             } else {
                 iBlogRepository.save(blog);
                 return true;
@@ -44,4 +43,10 @@ public class BlogService implements IBlogService {
     public void add(Blog blog){
         iBlogRepository.save(blog);
     }
+
+    public Boolean existsByTitle(String title){
+       return iBlogRepository.existsByTitle(title);
+    }
+
+
 }

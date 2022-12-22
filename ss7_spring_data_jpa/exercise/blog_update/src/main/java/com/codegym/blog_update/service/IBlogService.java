@@ -18,4 +18,5 @@ public interface IBlogService {
 
     void add(Blog blog);
 
+    Boolean existsByTitle(String title);
 }
