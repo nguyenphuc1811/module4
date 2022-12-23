@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <form th:action="@{/add}" th:method="post" th:object="${userDto}">
+        <tr>
+            <th>First Name</th>
+            <th><input type="text" th:field="*{firstName}"></th>
+            <th><span th:errors="*{firstName}"></span></th>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <th><input type="text" th:field="*{lastName}"></th>
+            <th><span th:errors="*{lastName}"></span></th>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <th><input type="text" th:field="*{phoneNumber}"></th>
+            <th><span th:errors="*{phoneNumber}"></span></th>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <th><input type="number" th:field="*{age}"></th>
+            <th><span th:errors="*{age}"></span></th>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <th><input type="text" th:field="*{email}">
+            </th>
+            <th><span th:errors="*{email}"></span></th>
+        </tr>
+        <button type="submit">ADD</button>
+    </form>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</body>
+</html>
