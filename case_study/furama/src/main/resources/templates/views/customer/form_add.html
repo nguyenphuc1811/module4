@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
+<script src="../bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="../bootstrap-5.1.3-dist/css/bootstrap.css">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form>
-    <form th:action="@{/customer/add}" th:method="post" th:object="${customer}">
-        <p>name: </p>
-        <input th:field="*{name}" type="text">
-        <p>dateOfBirth: </p>
-        <input th:field="*{dateOfBirth}" type="date">
-        <p>gender: </p>
-        <select th:field="*{gender}">
-            <option th:value="false">Nữ</option>
-            <option th:value="true">Nam</option>
-        </select>
-        <p>idCard: </p>
-        <input th:field="*{idCard}" type="text">
-        <p>Category: </p>
-        <input th:field="*{phoneNumber}" type="text">
-        <p>Category: </p>
-        <input th:field="*{email}" type="text">
-        <p>Category: </p>
-        <input th:field="*{address}" type="text">
-        <select th:field="*{customerType}">
+<form th:action="@{/customer/add}" method="post" th:object="${customer}">
+    <div class="m-3">
+    <div class="col-md-6">
+        <label class="form-label">Name:</label>
+        <input class="form-control" th:field="*{name}" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Date of Birth</label>
+        <input class="form-control" th:field="*{dateOfBirth}" type="date">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Gender</label>
+        <label>Male
+            <input th:value="true" type="radio" th:field="*{gender}">
+        </label>
+        <label>Famale
+            <input th:value="false" type="radio" th:field="*{gender}">
+        </label>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Id Card:</label>
+        <input class="form-control" th:field="*{idCard}" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Phone Number:</label>
+        <input class="form-control" th:field="*{phoneNumber}" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Email:</label>
+        <input class="form-control" th:field="*{email}" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Address</label>
+        <input class="form-control" th:field="*{address}" type="text">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Customer Type</label>
+        <select class="form-control" th:field="*{customerType}">
             <option th:each="type: ${customerTypeList}" th:value="${type.id}" th:text="${type.name}"></option>
         </select>
-        <button type="submit">ADD</button>
-    </form>
+    </div>
+    <button type="submit">ADD</button>
+    </div>
 </form>
 </body>
 </html>
