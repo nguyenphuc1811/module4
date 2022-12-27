@@ -2,6 +2,7 @@ package com.example.app_borrow_book.controller;
 
 import com.example.app_borrow_book.service.IBookService;
 import com.example.app_borrow_book.service.ICodeBookService;
+import org.hibernate.criterion.NotNullExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +34,16 @@ public class BookController {
 
     @GetMapping("/borrow/{id}")
     public String borrowBook(@PathVariable int id, Model model) {
-        model.addAttribute("codeBook", iBookService.borrowBook(id));
+        if (iBookService.findById(id).getQuantity() == 0) {
+            model.addAttribute("mess", "Đã hết sách");
+        } else {
+            model.addAttribute("codeBook", iBookService.borrowBook(id));
+        }
         return viewBook(id, model);
     }
 
     @GetMapping("/pay")
-    public String showPayBook(int codeBook, Model model) {
+    public String showPayBook(int codeBook, Model model) throws NullPointerException {
         if (iCodeBookService.findByCodeBook(codeBook) == null) {
             model.addAttribute("mess", "Không tìm thấy sách");
             return "list_book";

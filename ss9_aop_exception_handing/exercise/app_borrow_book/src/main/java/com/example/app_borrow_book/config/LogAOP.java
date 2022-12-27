@@ -6,6 +6,9 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Component
 @Aspect
 public class LogAOP {
@@ -15,6 +18,7 @@ public class LogAOP {
 
     @Before("borrowOrPayBookMethod()")
     public void beforeMethod(JoinPoint joinPoint) {
-        System.out.println("Phương thức đang sử dụng: " + joinPoint.getSignature().getName());
+        System.out.println("Phương thức đang sử dụng: " + joinPoint.getSignature().getName() +
+                " Time is: " + LocalDateTime.now());
     }
 }
