@@ -16,9 +16,11 @@ public class LogAOP {
     public void borrowOrPayBookMethod() {
     }
 
+    private int count;
+
     @Before("borrowOrPayBookMethod()")
     public void beforeMethod(JoinPoint joinPoint) {
         System.out.println("Phương thức đang sử dụng: " + joinPoint.getSignature().getName() +
-                " Time is: " + LocalDateTime.now());
+                " Time is: " + LocalDateTime.now() + " Số lần thực hiện " + count++);
     }
 }
