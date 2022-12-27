@@ -15,10 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class BookController {
 
     @Autowired
-    IBookService iBookService;
+    private IBookService iBookService;
 
     @Autowired
-    ICodeBookService iCodeBookService;
+    private ICodeBookService iCodeBookService;
 
     @RequestMapping
     public String showList(Model model) {

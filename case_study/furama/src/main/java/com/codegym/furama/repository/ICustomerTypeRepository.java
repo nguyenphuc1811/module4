@@ -3,5 +3,5 @@ package com.codegym.furama.repository;
 import com.codegym.furama.model.customer.CustomerType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICustomerType extends JpaRepository<CustomerType,Integer> {
+public interface ICustomerTypeRepository extends JpaRepository<CustomerType,Integer> {
 }

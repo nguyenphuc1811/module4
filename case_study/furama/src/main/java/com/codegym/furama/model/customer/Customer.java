@@ -9,17 +9,17 @@ public class Customer {
     private int id;
     @ManyToOne
     private CustomerType customerType;
-    @Column(nullable = false, columnDefinition = "varchar(45)")
+    @Column( nullable = false, columnDefinition = "varchar(45)")
     private String name;
     @Column(nullable = false, columnDefinition = "date")
     private String dateOfBirth;
     @Column(nullable = false)
     private boolean gender;
-    @Column(nullable = false,columnDefinition = "varchar(45)")
+    @Column(unique = true,nullable = false,columnDefinition = "varchar(45)")
     private String idCard;
-    @Column(nullable = false, columnDefinition = "varchar(45)")
+    @Column(unique = true,nullable = false, columnDefinition = "varchar(45)")
     private String phoneNumber;
-    @Column(columnDefinition = "varchar(45)")
+    @Column(unique = true,columnDefinition = "varchar(45)")
     private String email;
     @Column(columnDefinition = "varchar(45)")
     private String address;

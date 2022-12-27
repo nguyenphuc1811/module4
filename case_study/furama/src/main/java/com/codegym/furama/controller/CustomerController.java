@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CustomerController {
 
     @Autowired
-    ICustomerService customerService;
+    private ICustomerService customerService;
 
     @GetMapping("")
     public String displayList(@RequestParam(name = "searchName", defaultValue = "") String name,
