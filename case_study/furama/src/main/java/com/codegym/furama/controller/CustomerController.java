@@ -21,12 +21,14 @@ public class CustomerController {
     private ICustomerService customerService;
 
     @GetMapping("")
-    public String displayList(@RequestParam(name = "searchName", defaultValue = "") String name,
+    public String displayList(@RequestParam(name = "name", defaultValue = "") String name,
                               @RequestParam(name = "customerType", defaultValue = "") String customerType,
+                              @RequestParam(name = "email", defaultValue = "") String email,
                               @PageableDefault(size = 5) Pageable pageable,
                               Model model) {
-        Page<Customer> customerPage = customerService.searchCustomer(name,customerType,pageable);
-        model.addAttribute("customerList",customerPage);
+        Page<Customer> customerPage = customerService.searchCustomer(name, customerType, email, pageable);
+        model.addAttribute("customerTypeList", customerService.customerTypes());
+        model.addAttribute("customerList", customerPage);
         return "views/customer/list_customer";
     }
 
@@ -42,6 +44,12 @@ public class CustomerController {
     @PostMapping("/add")
     public String addConfirm(Customer customer) {
         customerService.addCustomer(customer);
+        return "redirect:/customer";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCustomer(int id) {
+        customerService.deleteCustomer(id);
         return "redirect:/customer";
     }
 }

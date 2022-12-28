@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -25,8 +26,8 @@ public class CustomerService implements ICustomerService {
         return customerRepository.findAll();
     }
 
-    public Page<Customer> searchCustomer(String name, String nameType, Pageable pageable) {
-        return customerRepository.searchCustomer(name, nameType, pageable);
+    public Page<Customer> searchCustomer(String name, String nameType, String email, Pageable pageable) {
+        return customerRepository.searchCustomer(name, nameType, email, pageable);
     }
 
     public void addCustomer(Customer customer) {
@@ -35,5 +36,13 @@ public class CustomerService implements ICustomerService {
 
     public List<CustomerType> customerTypes() {
         return iCustomerTypeRepository.findAll();
+    }
+
+    public Optional<Customer> findById(int id){
+      return customerRepository.findById(id);
+    }
+
+    public void deleteCustomer(int id){
+        customerRepository.deleteById(id);
     }
 }
