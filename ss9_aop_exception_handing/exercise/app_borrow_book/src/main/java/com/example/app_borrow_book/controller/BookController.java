@@ -35,7 +35,7 @@ public class BookController {
     @GetMapping("/borrow/{id}")
     public String borrowBook(@PathVariable int id, Model model) {
         if (iBookService.findById(id).getQuantity() == 0) {
-            model.addAttribute("mess", "Đã hết sách");
+            throw new NullPointerException();
         } else {
             model.addAttribute("codeBook", iBookService.borrowBook(id));
         }
