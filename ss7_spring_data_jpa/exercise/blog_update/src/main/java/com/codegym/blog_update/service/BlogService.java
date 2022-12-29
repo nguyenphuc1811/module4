@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository iBlogRepository;
 
-    public Page<Blog> findAll(Pageable pageable) {
-        return iBlogRepository.findAll(pageable);
+    public List<Blog> findAll() {
+        return iBlogRepository.findAll();
     }
 
     public Object getById(int id) {

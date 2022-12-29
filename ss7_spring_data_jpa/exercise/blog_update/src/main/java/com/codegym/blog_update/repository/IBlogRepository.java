@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
-    @Override
-    Page<Blog> findAll(Pageable pageable);
+//    @Override
+//    Page<Blog> findAll(Pageable pageable);
 
     Boolean existsByTitle(String title);
 }

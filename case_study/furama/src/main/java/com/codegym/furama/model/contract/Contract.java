@@ -2,6 +2,7 @@ package com.codegym.furama.model.contract;
 
 import com.codegym.furama.model.customer.Customer;
 import com.codegym.furama.model.employee.Employee;
+import com.codegym.furama.model.facility.Facility;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Contract {
     @ManyToOne
     private Customer customer;
     @ManyToOne
-    private com.codegym.furama.model.facility.Facility facility;
+    private Facility facility;
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetails;
 

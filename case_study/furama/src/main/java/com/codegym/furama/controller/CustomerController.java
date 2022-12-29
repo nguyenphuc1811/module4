@@ -28,7 +28,7 @@ public class CustomerController {
         Page<Customer> customerPage = customerService.searchCustomer(name, customerType, email, pageable);
         model.addAttribute("customerTypeList", customerService.customerTypes());
         model.addAttribute("customerList", customerPage);
-        return "views/customer/list_customer";
+        return "views/customer/listCustomer";
     }
 
     @GetMapping("/add")
@@ -37,11 +37,11 @@ public class CustomerController {
         customer.setGender(true);
         model.addAttribute("customer", customer);
         model.addAttribute("customerTypeList", customerService.customerTypes());
-        return "views/customer/form_add";
+        return "views/customer/formAdd";
     }
 
     @PostMapping("/add")
-    public String addConfirm(Customer customer, RedirectAttributes attributes) throws CustomerException {
+    public String addConfirm(Customer customer, RedirectAttributes attributes) {
         if (customerService.addCustomer(customer)) {
             attributes.addFlashAttribute("mess", "Thêm mới thành công");
         } else {

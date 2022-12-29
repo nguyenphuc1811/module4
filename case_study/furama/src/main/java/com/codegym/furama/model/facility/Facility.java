@@ -23,7 +23,7 @@ public class Facility {
     private String description;
     private Double poolArea;
     private int floor;
-    private int facilityFree;
+    private String facilityFree;
 
     public Facility() {
     }
@@ -116,14 +116,11 @@ public class Facility {
         this.floor = floor;
     }
 
-    public int getFacilityFree() {
+    public String getFacilityFree() {
         return facilityFree;
     }
 
-    public void setFacilityFree(int facilityFree) {
+    public void setFacilityFree(String facilityFree) {
         this.facilityFree = facilityFree;
     }
-
-
-
 }
