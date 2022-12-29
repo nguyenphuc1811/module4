@@ -1,5 +1,6 @@
 package com.codegym.furama.controller;
 
+import com.codegym.furama.handler_exception.CustomerException;
 import com.codegym.furama.model.customer.Customer;
 import com.codegym.furama.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/customer")
@@ -42,14 +41,32 @@ public class CustomerController {
     }
 
     @PostMapping("/add")
-    public String addConfirm(Customer customer) {
-        customerService.addCustomer(customer);
+    public String addConfirm(Customer customer, RedirectAttributes attributes) throws CustomerException {
+        if (customerService.addCustomer(customer)) {
+            attributes.addFlashAttribute("mess", "Thêm mới thành công");
+        } else {
+            attributes.addFlashAttribute("mess", "Thêm mới không thành công");
+        }
         return "redirect:/customer";
     }
 
     @PostMapping("/delete")
     public String deleteCustomer(int id) {
         customerService.deleteCustomer(id);
+        return "redirect:/customer";
+    }
+
+    @GetMapping("edit/{id}")
+    public String showEditForm(@PathVariable int id, Model model) {
+        model.addAttribute("customer", customerService.findById(id));
+        model.addAttribute("customerTypeList", customerService.customerTypes());
+        return "views/customer/edit";
+    }
+
+    @PostMapping("edit")
+    public String editConfirm(Customer customer, RedirectAttributes model) {
+        customerService.editCustomer(customer);
+        model.addFlashAttribute("mess", "Sửa thành công");
         return "redirect:/customer";
     }
 }

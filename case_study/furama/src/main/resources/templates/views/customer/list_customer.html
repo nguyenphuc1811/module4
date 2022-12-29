@@ -12,6 +12,7 @@
 <div th:insert="~{/views/layout::header}"></div>
 <div class="d-flex justify-content-between m-2">
     <button class="btn btn-sm btn-outline-success"><a href="/customer/add">Add</a></button>
+    <h4 class="btn-outline-warning" th:text="${mess}"></h4>
     <form class="d-flex" action="">
         <input name="name" class="form-control me-2" type="text" placeholder="Search name" aria-label="Search">
         <input name="email" class="form-control me-2" type="text" placeholder="Search Email" aria-label="Search">
@@ -52,6 +53,7 @@
             <button th:attr="onclick=|deleteById('${customer.id}','${customer.name}')|" class="btn btn-sm btn-outline-danger"
                     data-bs-toggle="modal" data-bs-target="#delete">Delete
             </button>
+            <button class="btn btn-sm btn-outline-danger"><a th:href="@{/customer/edit/__${customer.id}__}">Edit</a></button>
         </td>
     </tr>
     </tbody>

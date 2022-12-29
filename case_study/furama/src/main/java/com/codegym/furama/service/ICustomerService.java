@@ -11,13 +11,15 @@ import java.util.Optional;
 public interface ICustomerService {
     List<Customer> findAllCustomer();
 
-    void addCustomer(Customer customer);
+    boolean addCustomer(Customer customer);
 
-     List<CustomerType> customerTypes();
+    List<CustomerType> customerTypes();
 
     Page<Customer> searchCustomer(String name, String nameType, String email, Pageable pageable);
 
     Optional<Customer> findById(int id);
 
     void deleteCustomer(int id);
+
+    void editCustomer(Customer customer);
 }

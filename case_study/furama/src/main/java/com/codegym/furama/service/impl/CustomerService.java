@@ -30,19 +30,30 @@ public class CustomerService implements ICustomerService {
         return customerRepository.searchCustomer(name, nameType, email, pageable);
     }
 
-    public void addCustomer(Customer customer) {
+    public boolean addCustomer(Customer customer) {
+        for (Customer c :
+                findAllCustomer()) {
+            if (c.getId() == customer.getId()) {
+                return false;
+            }
+        }
         customerRepository.save(customer);
+        return true;
     }
 
     public List<CustomerType> customerTypes() {
         return iCustomerTypeRepository.findAll();
     }
 
-    public Optional<Customer> findById(int id){
-      return customerRepository.findById(id);
+    public Optional<Customer> findById(int id) {
+        return customerRepository.findById(id);
     }
 
-    public void deleteCustomer(int id){
+    public void deleteCustomer(int id) {
         customerRepository.deleteById(id);
+    }
+
+    public void editCustomer(Customer customer){
+        customerRepository.save(customer);
     }
 }
