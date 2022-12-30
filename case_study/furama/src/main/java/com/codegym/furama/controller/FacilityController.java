@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class FacilityController {
 
     @Autowired
-    IFacilityService facilityService;
+    private IFacilityService facilityService;
 
     @GetMapping("")
     public String displayList(@RequestParam(name = "name", defaultValue = "") String name,

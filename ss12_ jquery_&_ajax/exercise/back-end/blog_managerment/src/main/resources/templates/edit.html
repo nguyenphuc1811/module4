@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/}">Back</a>
+<form th:action="@{/saveConfirm}" th:method="post" th:object="${blog}">
+    <input type="hidden" th:field="*{id}">
+    <p>Title: </p>
+    <input th:field="*{title}" type="text">
+    <p>Writer: </p>
+    <input th:field="*{writer}" type="text">
+    <p>Content: </p>
+    <input th:field="*{content}" type="text">
+    <p>Date Created: </p>
+    <input th:field="*{dateCreated}" type="date">
+    <p>Category: </p>
+    <input th:field="*{category}" type="text">
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

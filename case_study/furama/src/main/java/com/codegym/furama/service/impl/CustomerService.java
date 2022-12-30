@@ -2,8 +2,8 @@ package com.codegym.furama.service.impl;
 
 import com.codegym.furama.model.customer.Customer;
 import com.codegym.furama.model.customer.CustomerType;
-import com.codegym.furama.repository.ICustomerRepository;
-import com.codegym.furama.repository.ICustomerTypeRepository;
+import com.codegym.furama.repository.customer.ICustomerRepository;
+import com.codegym.furama.repository.customer.ICustomerTypeRepository;
 import com.codegym.furama.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
