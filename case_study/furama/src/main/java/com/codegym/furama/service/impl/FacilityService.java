@@ -26,7 +26,7 @@ public class FacilityService implements IFacilityService {
     @Autowired
     private IRentTypeRepository rentTypeRepository;
 
-    public Page<Facility> findAll(String name, String facilityType, Pageable pageable) {
+    public Page<Facility> findAll(String name, int facilityType, Pageable pageable) {
         return facilityRepository.searchFacility(name, facilityType, pageable);
     }
 
@@ -44,7 +44,7 @@ public class FacilityService implements IFacilityService {
 
     public boolean addFacility(Facility facility) {
         for (Facility f : facilityRepository.findAll()) {
-            if (f.getId() == facility.getId()) {
+            if (f.getName().equals(facility.getName())) {
                 return false;
             }
         }
@@ -52,11 +52,15 @@ public class FacilityService implements IFacilityService {
         return true;
     }
 
-    public void editFacility(Facility facility){
+    public void editFacility(Facility facility) {
         facilityRepository.save(facility);
     }
 
-    public Optional<Facility> findById(int id){
-      return facilityRepository.findById(id);
+    public Optional<Facility> findById(int id) {
+        return facilityRepository.findById(id);
+    }
+
+    public Page<Facility> searchFacilityByName(String name, Pageable pageable) {
+        return facilityRepository.searchFacilityByName(name, pageable);
     }
 }

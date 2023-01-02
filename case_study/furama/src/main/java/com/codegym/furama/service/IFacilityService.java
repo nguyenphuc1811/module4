@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IFacilityService {
-    Page<Facility> findAll(String name, String facilityType, Pageable pageable);
+    Page<Facility> findAll(String name, int facilityType, Pageable pageable);
 
     List<FacilityType> facilityTypeList();
 
@@ -24,4 +24,6 @@ public interface IFacilityService {
     void editFacility(Facility facility);
 
     Optional<Facility> findById(int id);
+
+    Page<Facility> searchFacilityByName(String name, Pageable pageable);
 }

@@ -22,10 +22,15 @@ public class FacilityController {
 
     @GetMapping("")
     public String displayList(@RequestParam(name = "name", defaultValue = "") String name,
-                              @RequestParam(name = "facilityType", defaultValue = "") String customerType,
+                              @RequestParam(name = "facilityType", defaultValue = "0") int customerType,
                               @PageableDefault(size = 5) Pageable pageable,
                               Model model) {
-        Page<Facility> facilities = facilityService.findAll(name, customerType, pageable);
+        Page<Facility> facilities;
+        if (customerType == 0) {
+            facilities = facilityService.searchFacilityByName(name, pageable);
+        } else {
+            facilities = facilityService.findAll(name, customerType, pageable);
+        }
         model.addAttribute("facilityTypeList", facilityService.facilityTypeList());
         model.addAttribute("rentTypeList", facilityService.rentTypeList());
         model.addAttribute("facilityList", facilities);

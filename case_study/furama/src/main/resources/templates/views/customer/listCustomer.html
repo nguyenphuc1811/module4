@@ -18,7 +18,7 @@
         <input name="email" class="form-control me-2" type="text" placeholder="Search Email" aria-label="Search">
         <select class="form-control" name="customerType">
             <option value="">All Type</option>
-            <option th:each="type : ${customerTypeList}" th:value="${type.name}" th:text="${type.name}"></option>
+            <option th:each="type : ${customerTypeList}" th:value="${type.id}" th:text="${type.name}"></option>
         </select>
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
