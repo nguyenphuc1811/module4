@@ -10,16 +10,16 @@
 <body>
 <div th:insert="~{/views/layout::header}"></div>
 <form th:action="@{/facility/add}" method="post" th:object="${facility}">
-    <div class="m-3 justify-content-center row">
+    <div class="m-3 row">
         <div class="col-md-3">
             <label class="form-label">Facility Type</label>
-            <select class="form-control" onchange="add()" id="facilityType" th:field="*{facilityType}">
+            <select class="form-control" onchange="addCustomer()" id="facilityType" th:field="*{facilityType}">
                 <option th:each="type: ${facilityTypeList}" th:value="${type.id}"
                         th:text="${type.name}"></option>
             </select>
         </div>
     </div>
-    <div class="m-3 justify-content-center row">
+    <div class="m-3 row">
         <div class="col-md-5">
             <label class="form-label">Rent Type</label>
             <select class="form-control" th:field="*{rentType}">
@@ -33,7 +33,7 @@
         </div>
 
     </div>
-    <div class="m-3 justify-content-center row">
+    <div class="m-3 row">
         <div class="col-md-5">
             <label class="form-label">Cost:</label>
             <input class="form-control" th:field="*{cost}" type="text">
@@ -43,29 +43,27 @@
             <input class="form-control" th:field="*{maxPeople}" type="text">
         </div>
     </div>
-    <div id="villa">
-        <div class="m-3 justify-content-center row">
-            <div class="col-md-5">
-                <label class="form-label">Description:</label>
-                <input class="form-control" th:field="*{description}" type="text">
-            </div>
-            <div class="col-md-5">
-                <label class="form-label">Floor</label>
-                <input class="form-control" th:field="*{floor}" type="text">
-            </div>
+    <div class="m-3 row" id="villa1">
+        <div class="col-md-5">
+            <label class="form-label">Description:</label>
+            <input class="form-control" th:field="*{description}" type="text">
         </div>
-        <div class="m-3 justify-content-center row">
-            <div class="col-md-5">
-                <label class="form-label">Standard Room</label>
-                <input th:value="vip" type="radio" th:field="*{standardRoom}">
-            </div>
-            <div class="col-md-5" id="house">
-                <label class="form-label">Pool Area</label>
-                <input class="form-control" th:field="*{poolArea}" type="text">
-            </div>
+        <div class="col-md-5">
+            <label class="form-label">Floor</label>
+            <input class="form-control" th:field="*{floor}" type="text">
         </div>
     </div>
-    <div class="m-3 justify-content-center row">
+    <div class="m-3 row">
+        <div class="col-md-5" id="villa2">
+            <label class="form-label">Standard Room</label>
+            <input type="text" class="form-control" th:field="*{standardRoom}">
+        </div>
+        <div class="col-md-5" id="house">
+            <label class="form-label">Pool Area</label>
+            <input class="form-control" th:field="*{poolArea}" type="text">
+        </div>
+    </div>
+    <div class="m-3 row">
         <div class="col-md-5" id="room">
             <label class="form-label">Facility Free</label>
             <input class="form-control" th:field="*{facilityFree}" type="text">
@@ -79,22 +77,28 @@
 </form>
 <div th:insert="~{/views/layout::footer}"></div>
 <script>
-    add();
+    addCustomer();
 
-    function add() {
+    function addCustomer() {
         let id = +document.getElementById("facilityType").value;
-        let villa = document.getElementById("villa");
+        let villa1 = document.getElementById("villa1");
+        let villa2 = document.getElementById("villa2");
         let room = document.getElementById("room");
         let house = document.getElementById("house");
         if (id === 1) {
-            villa.style.display = "block";
+            villa1.style.display = "block";
+            villa2.style.display = "block";
+            house.style.display = "block";
             room.style.display = "none";
         } else if (id === 2) {
-            villa.style.display = "block";
             house.style.display = "none";
             room.style.display = "none";
+            villa1.style.display = "block";
+            villa2.style.display = "block";
         } else {
-            villa.style.display = "none";
+            villa1.style.display = "none";
+            villa2.style.display = "none";
+            house.style.display = "none";
             room.style.display = "block"
         }
     }
