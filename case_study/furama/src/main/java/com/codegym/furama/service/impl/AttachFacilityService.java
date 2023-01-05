@@ -19,6 +19,14 @@ public class AttachFacilityService implements IAttachFacilityService {
     }
 
     public List<AttachFacility> findAttachFacilityByContractId(int id) {
-       return attachFacilityRepository.findAttachFacilityByContractId(id);
+        return attachFacilityRepository.findAttachFacilityByContractId(id);
+    }
+
+    public int getQuantity(int id, int idAf) {
+        return attachFacilityRepository.getQuantity(id, idAf);
+    }
+
+    public AttachFacility findById(int id) {
+        return attachFacilityRepository.getReferenceById(id);
     }
 }

@@ -22,4 +22,8 @@ public class ContractService implements IContractService {
         return iContractRepository.getReferenceById(id);
     }
 
+    public void addContract(Contract contract){
+        iContractRepository.save(contract);
+    }
+
 }

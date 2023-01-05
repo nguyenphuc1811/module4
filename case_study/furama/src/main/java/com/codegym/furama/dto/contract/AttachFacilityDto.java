@@ -7,6 +7,15 @@ public class AttachFacilityDto {
     private Double cost;
     private String unit;
     private String status;
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public int getId() {
         return id;

@@ -1,9 +1,12 @@
 package com.codegym.furama.dto.contract;
 
-public class ContactDetailDto {
+import com.codegym.furama.model.contract.AttachFacility;
+import com.codegym.furama.model.contract.Contract;
+
+public class ContractDetailDto {
     private int id;
-    private int contract;
-    private int attachFacility;
+    private Contract contract;
+    private AttachFacility attachFacility;
     private int quantity;
 
     public int getId() {
@@ -14,19 +17,19 @@ public class ContactDetailDto {
         this.id = id;
     }
 
-    public int getContract() {
+    public Contract getContract() {
         return contract;
     }
 
-    public void setContract(int contract) {
+    public void setContract(Contract contract) {
         this.contract = contract;
     }
 
-    public int getAttachFacility() {
+    public AttachFacility getAttachFacility() {
         return attachFacility;
     }
 
-    public void setAttachFacility(int attachFacility) {
+    public void setAttachFacility(AttachFacility attachFacility) {
         this.attachFacility = attachFacility;
     }
 
