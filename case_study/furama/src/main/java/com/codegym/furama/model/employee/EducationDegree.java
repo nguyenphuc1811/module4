@@ -1,5 +1,7 @@
 package com.codegym.furama.model.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class EducationDegree {
     private int id;
     private String name;
     @OneToMany(mappedBy = "educationDegree")
+    @JsonBackReference
     private List<Employee> employee;
 
     public EducationDegree() {

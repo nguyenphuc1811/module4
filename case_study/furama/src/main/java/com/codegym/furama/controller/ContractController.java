@@ -2,7 +2,7 @@ package com.codegym.furama.controller;
 
 import com.codegym.furama.model.contract.Contract;
 import com.codegym.furama.model.contract.ContractDetail;
-import com.codegym.furama.service.IContractService;
+import com.codegym.furama.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,17 +16,34 @@ import org.springframework.web.bind.annotation.*;
 public class ContractController<Set> {
 
     @Autowired
-    IContractService iContractService;
+    private IContractService contractService;
+
+    @Autowired
+    private ICustomerService customerService;
+
+    @Autowired
+    private IEmployeeService employeeService;
+
+    @Autowired
+    private IFacilityService facilityService;
+
+    @Autowired
+    private IAttachFacilityService attachFacilityService;
 
     @GetMapping("")
     public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        model.addAttribute("contractList", iContractService.fillAll(pageable));
+        model.addAttribute("contractList", contractService.fillAll(pageable));
+        model.addAttribute("customerList", customerService.findAllCustomer());
+        model.addAttribute("employeeList", employeeService.findAll());
+        model.addAttribute("facilityList", facilityService.getAll());
+        model.addAttribute("contract", new Contract());
         return "views/contract/listContract";
     }
 
     @ResponseBody
     @GetMapping("/showAttach/{id}")
     public Contract contractDetailSet(@PathVariable("id") int id, Model model) {
-        return iContractService.findById(id);
+        return contractService.findById(id);
     }
+
 }

@@ -13,12 +13,12 @@ public class UserRole {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    AppUser appUser;
+    private AppUser appUser;
 
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
-    AppRole appRole;
+    private AppRole appRole;
 
 
     public UserRole() {

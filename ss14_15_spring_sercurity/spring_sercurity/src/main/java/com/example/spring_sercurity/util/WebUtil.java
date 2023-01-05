@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-public class WebUntil {
+public class WebUtil {
     public static String toString(User user) {
         StringBuilder sb = new StringBuilder();
 

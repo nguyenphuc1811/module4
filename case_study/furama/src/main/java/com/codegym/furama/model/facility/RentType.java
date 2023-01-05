@@ -1,5 +1,7 @@
 package com.codegym.furama.model.facility;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ public class RentType {
     @Column(columnDefinition = "varchar(45)")
     private String name;
     @OneToMany(mappedBy = "rentType")
+    @JsonBackReference
     private Set<Facility> facilities;
 
     public Set<Facility> getFacilities() {

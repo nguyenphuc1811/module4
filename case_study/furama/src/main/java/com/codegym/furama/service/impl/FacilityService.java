@@ -30,6 +30,10 @@ public class FacilityService implements IFacilityService {
         return facilityRepository.searchFacility(name, facilityType, pageable);
     }
 
+    public List<Facility> getAll() {
+        return facilityRepository.findAll();
+    }
+
     public List<FacilityType> facilityTypeList() {
         return facilityTypeRepository.findAll();
     }

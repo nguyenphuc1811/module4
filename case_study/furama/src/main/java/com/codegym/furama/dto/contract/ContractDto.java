@@ -1,44 +1,31 @@
-package com.codegym.furama.model.contract;
+package com.codegym.furama.dto.contract;
 
+import com.codegym.furama.model.contract.ContractDetail;
 import com.codegym.furama.model.customer.Customer;
 import com.codegym.furama.model.employee.Employee;
 import com.codegym.furama.model.facility.Facility;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import java.util.Set;
 
-@Entity
-public class Contract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ContractDto {
+    @Column(name = "contract_id")
     private int id;
-    @Column(nullable = false, columnDefinition = "date")
+    @Column(columnDefinition = "date")
     private String startDate;
-    @Column(nullable = false, columnDefinition = "date")
+    @Column(columnDefinition = "date")
     private String endDate;
-    @Column(nullable = false)
     private Double deposit;
-    @ManyToOne
+
     private Employee employee;
-    @ManyToOne
+
     private Customer customer;
-    @ManyToOne
+
     private Facility facility;
-    @OneToMany(mappedBy = "contract")
-    @JsonBackReference
-    private Set<ContractDetail> contractDetails;
 
-    public Set<ContractDetail> getContractDetails() {
-        return contractDetails;
-    }
+    private Double total;
 
-    public void setContractDetails(Set<ContractDetail> contractDetails) {
-        this.contractDetails = contractDetails;
-    }
-
-    public Contract() {
-    }
+    private Set<ContractDetail> contractDetail;
 
     public int getId() {
         return id;
@@ -88,12 +75,27 @@ public class Contract {
         this.customer = customer;
     }
 
-    public com.codegym.furama.model.facility.Facility getFacility() {
+    public Facility getFacility() {
         return facility;
     }
 
-    public void setFacility(com.codegym.furama.model.facility.Facility facility) {
+    public void setFacility(Facility facility) {
         this.facility = facility;
     }
 
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Set<ContractDetail> getContractDetail() {
+        return contractDetail;
+    }
+
+    public void setContractDetail(Set<ContractDetail> contractDetail) {
+        this.contractDetail = contractDetail;
+    }
 }

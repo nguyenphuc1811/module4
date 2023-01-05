@@ -1,5 +1,7 @@
 package com.codegym.furama.model.contract;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class ContractDetail {
     @ManyToOne
     private Contract contract;
     @ManyToOne
+    @JsonBackReference
     private AttachFacility attachFacility;
     @Column(nullable = false)
     private int quantity;

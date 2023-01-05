@@ -1,6 +1,6 @@
 package com.codegym.furama.model.employee;
 
-import org.springframework.web.bind.annotation.Mapping;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +12,7 @@ public class Position {
     private int id;
     private String name;
     @OneToMany(mappedBy = "position")
+    @JsonBackReference
     private List<Employee> employee;
 
     public Position() {

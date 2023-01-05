@@ -21,4 +21,5 @@ public class ContractService implements IContractService {
     public Contract findById(int id) {
         return iContractRepository.getReferenceById(id);
     }
+
 }

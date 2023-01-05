@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
     @Autowired
-    AppUserService appUserService;
+    public AppUserService appUserService;
 
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
