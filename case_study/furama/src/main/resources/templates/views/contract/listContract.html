@@ -35,6 +35,7 @@
         <td th:text="${contract.startDate}"></td>
         <td th:text="${contract.endDate}"></td>
         <td th:text="${contract.deposit}"></td>
+        <td th:text="${contract.total}"></td>
         <td></td>
 
         <td>
@@ -159,16 +160,6 @@
                             <select class="form-control" th:field="*{customer}">
                                 <option value="">Chọn Khách hàng</option>
                                 <option th:each="item: ${customerList}" th:value="${item.id}"
-                                        th:text="${item.name}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Dịch vụ</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" th:field="*{facility}">
-                                <option value="">Chọn dịch vụ</option>
-                                <option th:each="item: ${facilityList}" th:value="${item.id}"
                                         th:text="${item.name}"></option>
                             </select>
                         </div>

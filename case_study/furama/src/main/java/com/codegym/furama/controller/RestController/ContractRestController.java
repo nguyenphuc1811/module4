@@ -16,17 +16,17 @@ import java.util.List;
 @RequestMapping("/contracts")
 public class ContractRestController {
 
-    @Autowired
-    private IContractService ContractService;
-
-    @Autowired
-    private ICustomerService customerService;
-
-    @Autowired
-    private IEmployeeService employeeService;
-
-    @Autowired
-    private IFacilityService facilityService;
+//    @Autowired
+//    private IContractService ContractService;
+//
+//    @Autowired
+//    private ICustomerService customerService;
+//
+//    @Autowired
+//    private IEmployeeService employeeService;
+//
+//    @Autowired
+//    private IFacilityService facilityService;
 
     @Autowired
     private IAttachFacilityService attachFacilityService;
