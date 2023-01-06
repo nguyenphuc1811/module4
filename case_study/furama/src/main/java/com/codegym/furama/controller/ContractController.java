@@ -43,18 +43,19 @@ public class ContractController {
 
     @GetMapping("")
     public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        List<ContractDto> contractDtoList = new ArrayList<>();
-        for (Contract contract :
-                contractService.fillAll()) {
-            ContractDto contractDto = new ContractDto();
-            BeanUtils.copyProperties(contract, contractDto);
-            contractDto.setTotal(contractService.getTotal(contractDto.getId()));
-            contractDtoList.add(contractDto);
-        }
-        int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), contractDtoList.size());
-        Page<ContractDto> dtoPage = new PageImpl<>(contractDtoList.subList(start, end), pageable, contractDtoList.size());
-        model.addAttribute("contractList", dtoPage);
+//               List<ContractDto> contractDtoList = new ArrayList<>();
+//        for (Contract contract :
+//                contractService.fillAll()) {
+//            ContractDto contractDto = new ContractDto();
+//            BeanUtils.copyProperties(contract, contractDto);
+//            contractDto.setTotal(contractService.getTotal(contractDto.getId()));
+//            contractDtoList.add(contractDto);
+//        }
+//        int start = (int) pageable.getOffset();
+//        int end = Math.min((start + pageable.getPageSize()), contractDtoList.size());
+//        Page<ContractDto> dtoPage = new PageImpl<>(contractDtoList.subList(start, end), pageable, contractDtoList.size());
+//        model.addAttribute("contractList", dtoPage);
+        model.addAttribute("contractList",contractService.findAllContract(pageable));
         model.addAttribute("customerList", customerService.findAllCustomer());
         model.addAttribute("employeeList", employeeService.findAll());
         model.addAttribute("facilityList", facilityService.getAll());

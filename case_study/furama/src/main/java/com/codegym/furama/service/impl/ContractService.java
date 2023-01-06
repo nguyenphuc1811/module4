@@ -1,5 +1,6 @@
 package com.codegym.furama.service.impl;
 
+import com.codegym.furama.dto.contract.IContractDto;
 import com.codegym.furama.model.contract.Contract;
 import com.codegym.furama.repository.contract.IContractRepository;
 import com.codegym.furama.service.IContractService;
@@ -28,7 +29,11 @@ public class ContractService implements IContractService {
         iContractRepository.save(contract);
     }
 
-    public Double getTotal(int id) {
-        return iContractRepository.getTotal(id);
+//    public Double getTotal(int id) {
+//        return iContractRepository.getTotal(id);
+//    }
+
+    public Page<IContractDto> findAllContract(Pageable pageable) {
+        return iContractRepository.findAllContract(pageable);
     }
 }

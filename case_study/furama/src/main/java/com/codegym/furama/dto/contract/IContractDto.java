@@ -19,7 +19,7 @@ public interface IContractDto {
 
     String getEndDate();
 
-    double getDeposit();
+    Double getDeposit();
 
-    double getTotal();
+    Double getTotal();
 }

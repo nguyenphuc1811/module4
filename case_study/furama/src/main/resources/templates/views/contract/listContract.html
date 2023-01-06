@@ -30,12 +30,12 @@
     <tbody>
     <tr th:each="contract, status : ${contractList.content}">
         <td th:text="${status.count + contractList.number * contractList.size}"></td>
-        <td th:text="${contract.facility.name}"></td>
-        <td th:text="${contract.customer.name}"></td>
-        <td th:text="${contract.startDate}"></td>
-        <td th:text="${contract.endDate}"></td>
-        <td th:text="${contract.deposit}"></td>
-        <td th:text="${contract.total}"></td>
+        <td th:text="${contract.getEmployeeName()}"></td>
+        <td th:text="${contract.getCustomerName()}"></td>
+        <td th:text="${contract.getStartDate()}"></td>
+        <td th:text="${contract.getEndDate()}"></td>
+        <td th:text="${contract.getDeposit()}"></td>
+        <td th:text="${contract.getTotal()}"></td>
         <td></td>
 
         <td>
@@ -44,7 +44,7 @@
                     data-bs-toggle="modal" data-bs-target="#add-attach-facility"
                     th:attr="onclick=|addAttachFacility('${contract.id}')|">+
             </button>
-            <button th:attr="onclick=|viewAttachFacility('${contract.id}','${contract.customer.name}')|"
+            <button th:attr="onclick=|viewAttachFacility('${contract.id}','${contract.customerName}')|"
                     class="bg-info btn-outline-warning"
                     data-bs-toggle="modal" data-bs-target="#view-attach-facility">Danh sách dịch vụ đi kèm
             </button>
