@@ -46,15 +46,17 @@ public class CustomerService implements ICustomerService {
 
     public Map<String, String> regexCustomer(CustomerDto customerDto) {
         Map<String, String> errorMap = new LinkedHashMap<>();
-        for (Customer customer: customerRepository.findAll()){
-            if(customer.getEmail().equals(customerDto.getAddress())){
-                errorMap.put("email","Email đã tồn tại");
-            }
-            if(customer.getIdCard().equals(customerDto.getIdCard())){
-                errorMap.put("idCard","ID Card đã tồn tại");
-            }
-            if(customer.getPhoneNumber().equals(customerDto.getPhoneNumber())){
-                errorMap.put("phoneNumber","Số điện thoại đã tồn tại");
+        for (Customer customer : customerRepository.findAll()) {
+            if (customer.getId() != customerDto.getId()) {
+                if (customer.getEmail().equals(customerDto.getEmail())) {
+                    errorMap.put("email", "Email đã tồn tại");
+                }
+                if (customer.getIdCard().equals(customerDto.getIdCard())) {
+                    errorMap.put("idCard", "ID Card đã tồn tại");
+                }
+                if (customer.getPhoneNumber().equals(customerDto.getPhoneNumber())) {
+                    errorMap.put("phoneNumber", "Số điện thoại đã tồn tại");
+                }
             }
         }
         return errorMap;

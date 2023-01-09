@@ -4,17 +4,24 @@ import com.codegym.furama.model.contract.ContractDetail;
 import com.codegym.furama.model.customer.Customer;
 import com.codegym.furama.model.employee.Employee;
 import com.codegym.furama.model.facility.Facility;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Min;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
-public class ContractDto {
+public class ContractDto implements Validator {
     @Column(name = "contract_id")
     private int id;
     @Column(columnDefinition = "date")
     private String startDate;
     @Column(columnDefinition = "date")
     private String endDate;
+    @Min(value = 1, message = "Nhập phải là số nguyên dương")
     private Double deposit;
 
     private Employee employee;
@@ -97,5 +104,24 @@ public class ContractDto {
 
     public void setContractDetail(Set<ContractDetail> contractDetail) {
         this.contractDetail = contractDetail;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ContractDto contractDto = (ContractDto) target;
+        try {
+            Date format = new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.endDate);
+            Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.startDate);
+            if (format2.compareTo(format) > 0) {
+                errors.rejectValue("endDate", "endDate", "Ngày kết thúc > Ngày bắt đầu");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

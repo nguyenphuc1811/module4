@@ -53,7 +53,9 @@ public class ContractController {
 //        }
 //        int start = (int) pageable.getOffset();
 //        int end = Math.min((start + pageable.getPageSize()), contractDtoList.size());
-//        Page<ContractDto> dtoPage = new PageImpl<>(contractDtoList.subList(start, end), pageable, contractDtoList.size());
+//        Page<ContractDto> dtoPage = new PageImpl<>(contractDtoList.subList(start,
+//
+//        end), pageable, contractDtoList.size());
 //        model.addAttribute("contractList", dtoPage);
         model.addAttribute("contractList",contractService.findAllContract(pageable));
         model.addAttribute("customerList", customerService.findAllCustomer());

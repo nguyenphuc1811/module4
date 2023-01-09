@@ -17,9 +17,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.swing.*;
 import java.util.Map;
 import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/customer")
@@ -57,6 +57,7 @@ public class CustomerController {
         Map<String, String> errorMap = customerService.regexCustomer(customerDto);
         attributes.addAttribute("customerTypeList", customerService.customerTypes());
         attributes.addAttribute("customer", customerDto);
+        new CustomerDto().validate(customerDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "views/customer/formAdd";
         }
@@ -81,15 +82,32 @@ public class CustomerController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
-        model.addAttribute("customer", customerService.findById(id));
+        CustomerDto customerDto = new CustomerDto();
+        BeanUtils.copyProperties(customerService.findById(id).get(), customerDto);
+        model.addAttribute("customerDto", customerDto);
         model.addAttribute("customerTypeList", customerService.customerTypes());
         return "views/customer/edit";
     }
 
     @PostMapping("/edit")
-    public String editConfirm(Customer customer, RedirectAttributes model) {
-        customerService.editCustomer(customer);
-        model.addFlashAttribute("mess", "Sửa thành công");
+    public String editConfirm(@Validated @ModelAttribute CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes attributes) {
+        Map<String, String> errorMap = customerService.regexCustomer(customerDto);
+        model.addAttribute("customerTypeList", customerService.customerTypes());
+        model.addAttribute("customerDto", customerDto);
+        new CustomerDto().validate(customerDto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "views/customer/edit";
+        }
+        if (errorMap.isEmpty()) {
+            Customer customer = new Customer();
+            BeanUtils.copyProperties(customerDto, customer);
+            attributes.addFlashAttribute("mess", "Sửa thành công");
+            customerService.editCustomer(customer);
+        } else {
+            for (Map.Entry<String, String> error : errorMap.entrySet()) {
+                bindingResult.rejectValue(error.getKey(), error.getKey(), error.getValue());
+            }
+        }
         return "redirect:/customer";
     }
 }
