@@ -7,7 +7,7 @@ import com.codegym.furama.model.facility.Facility;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.validation.constraints.Min;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,11 +15,9 @@ import java.util.Date;
 import java.util.Set;
 
 public class ContractDto implements Validator {
-    @Column(name = "contract_id")
+
     private int id;
-    @Column(columnDefinition = "date")
     private String startDate;
-    @Column(columnDefinition = "date")
     private String endDate;
     @Min(value = 1, message = "Nhập phải là số nguyên dương")
     private Double deposit;
@@ -121,7 +119,8 @@ public class ContractDto implements Validator {
                 errors.rejectValue("endDate", "endDate", "Ngày kết thúc > Ngày bắt đầu");
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            errors.rejectValue("endDate", "endDate", "Không đúng định dạng");
+            errors.rejectValue("startDate", "startDate", "Không đúng định dạng");
         }
     }
 }

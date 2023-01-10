@@ -11,7 +11,7 @@
 <div th:insert="~{/views/layout::header}"></div>
 <button
         class="bg-info btn-outline-warning"
-        data-bs-toggle="modal" data-bs-target="#add">Thêm mới hợp đồng
+        data-bs-toggle="modal" data-bs-target="#addContract">Thêm mới hợp đồng
 </button>
 <table class="table table-striped table-hover" style="--bs-table-hover-bg: lightblue">
     <thead>
@@ -128,60 +128,72 @@
     </div>
 </div>
 <!--------------------------------------------------------thêm mới hợp đồng-->
-<div class="modal fade" id="add" tabindex="-1" aria-labelledby="addLabel" aria-hidden="true">
+<div class="modal fade" id="addContract" tabindex="-1" aria-labelledby="addLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addLabel">Thêm hợp đồng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/contract/add" method="post" th:object="${contractDto}">
-                <div class="modal-body">
-                    <div class="mb-3 row">
-                        <label th:for="startDate" class="col-sm-3 col-form-label ">Ngày bắt đầu</label>
-                        <div class="col-sm-9">
-                            <input type="date" class="form-control" th:field="*{startDate}">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label th:for="endDate" class="col-sm-3 col-form-label">Ngày kết thúc</label>
-                        <div class="col-sm-9">
-                            <input type="date" class="form-control" th:field="*{endDate}">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label th:for="deposit" class="col-sm-3 col-form-label">Tiền đặt cọc</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" th:field="*{deposit}">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Khách hàng thuê dịch vụ</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" th:field="*{customer}">
-                                <option value="">Chọn Khách hàng</option>
-                                <option th:each="item: ${customerList}" th:value="${item.id}"
-                                        th:text="${item.name}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Dịch vụ</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" th:field="*{facility}">
-                                <option value="">Chọn dịch vụ</option>
-                                <option th:each="item: ${facilityList}" th:value="${item.id}"
-                                        th:text="${item.name}"></option>
-                            </select>
-                        </div>
+            <div class="modal-body">
+                <div class="mb-3 row">
+                    <label th:for="startDate" class="col-sm-3 col-form-label ">Ngày bắt đầu</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="startDate">
+                        <p id="startDateError"></p>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ
-                    </button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                <div class="mb-3 row">
+                    <label th:for="endDate" class="col-sm-3 col-form-label">Ngày kết thúc</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="endDate">
+                        <p id="endDateError"></p>
+                    </div>
+
                 </div>
-            </form>
+                <div class="mb-3 row">
+                    <label th:for="deposit" class="col-sm-3 col-form-label">Tiền đặt cọc</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="deposit">
+                        <p id="depositError"></p>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Khách hàng thuê dịch vụ</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="customerType">
+                            <option value="">Chọn Khách hàng</option>
+                            <option th:each="item: ${customerList}" th:value="${item.id}"
+                                    th:text="${item.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Dịch vụ</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="faciity">
+                            <option value="">Chọn dịch vụ</option>
+                            <option th:each="item: ${facilityList}" th:value="${item.id}"
+                                    th:text="${item.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-3 col-form-label">Nhân viên</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="employee">
+                            <option value="">Chọn dịch vụ</option>
+                            <option th:each="item: ${employeeList}" th:value="${item.id}"
+                                    th:text="${item.name}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ
+                </button>
+                <button type="button" th:attr="onclick=|addContract()|" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
@@ -239,5 +251,59 @@
     function addAttachFacility(id) {
         document.getElementById("contractId").value = id;
     }
+
+    function addContract() {
+        let facility = {
+            id: $('#faciity').val()
+        }
+        let customer = {
+            id: $('#customerType').val()
+        }
+        let employee = {
+            id: $('#employee').val()
+        }
+        let contractDto = {
+            startDate: $('#startDate').val(),
+            endDate: $('#endDate').val(),
+            deposit: $('#deposit').val(),
+            customerType: customer,
+            facility: facility,
+            employee: employee
+        };
+        // debugger
+        $.ajax({
+            type: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            data: JSON.stringify(contractDto),
+            url: "/contracts/create",
+            // dataType: "json",
+            success: function (data) {
+                if (data.deposit != null) {
+                    document.getElementById("depositError").innerText = data.deposit;
+                } else {
+                    $('#depositError').hidden;
+                }
+                if (data.endDate != null) {
+                    document.getElementById("endDateError").innerText = data.endDate;
+                } else {
+                    $('#endDate').hidden;
+                }
+                if (data.startDate != null) {
+                    document.getElementById("startDateError").innerText = data.startDate;
+                } else {
+                    $('#endDate').hidden;
+                }
+                if (data.length === 0) {
+                    $('#addContract').modal('hide');
+                }
+            }
+        });
+        // event.defaultPrevented();
+    }
+
+
 </script>
 </html>

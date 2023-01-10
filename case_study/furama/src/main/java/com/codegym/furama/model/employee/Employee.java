@@ -1,6 +1,8 @@
 package com.codegym.furama.model.employee;
 
 import com.codegym.furama.model.employee.user_role.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -29,6 +31,7 @@ public class Employee {
     private Division division;
     @OneToOne
     @JoinColumn(name = "username",referencedColumnName = "username")
+    @JsonIgnore
     private User user;
 
     public Employee() {

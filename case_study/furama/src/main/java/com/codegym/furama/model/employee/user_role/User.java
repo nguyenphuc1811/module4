@@ -1,6 +1,7 @@
 package com.codegym.furama.model.employee.user_role;
 
 import com.codegym.furama.model.employee.Employee;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,10 +13,8 @@ public class User {
     private String username;
     private String password;
     @ManyToMany(mappedBy = "users")
-    @JsonManagedReference
+    @JsonIgnore
     private Set<Role> roleSet;
-    @OneToOne(mappedBy = "user")
-    private Employee employee;
     public User() {
     }
 
@@ -41,13 +40,5 @@ public class User {
 
     public void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 }
