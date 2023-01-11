@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ
+                <button type="button" class="btn btn-secondary" id="btnCancel" data-bs-dismiss="modal">Hủy bỏ
                 </button>
                 <button type="button" th:attr="onclick=|addContract()|" class="btn btn-primary">Save changes</button>
             </div>
@@ -281,23 +281,25 @@
             url: "/contracts/create",
             // dataType: "json",
             success: function (data) {
-                if (data.deposit != null) {
-                    document.getElementById("depositError").innerText = data.deposit;
+                debugger
+                if (Object.keys(data).length === 0) {
+                    document.getElementById("btnCancel").click();
                 } else {
-                    $('#depositError').hidden;
-                }
-                if (data.endDate != null) {
-                    document.getElementById("endDateError").innerText = data.endDate;
-                } else {
-                    $('#endDate').hidden;
-                }
-                if (data.startDate != null) {
-                    document.getElementById("startDateError").innerText = data.startDate;
-                } else {
-                    $('#endDate').hidden;
-                }
-                if (data.length === 0) {
-                    $('#addContract').modal('hide');
+                    if (data.deposit != null) {
+                        document.getElementById("depositError").innerText = data.deposit;
+                    } else {
+                        $('#depositError').hidden;
+                    }
+                    if (data.endDate != null) {
+                        document.getElementById("endDateError").innerText = data.endDate;
+                    } else {
+                        $('#endDate').hidden;
+                    }
+                    if (data.startDate != null) {
+                        document.getElementById("startDateError").innerText = data.startDate;
+                    } else {
+                        $('#endDate').hidden;
+                    }
                 }
             }
         });

@@ -7,8 +7,6 @@ import com.codegym.furama.model.facility.Facility;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-//import javax.persistence.Column;
-import javax.validation.constraints.Min;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +17,6 @@ public class ContractDto implements Validator {
     private int id;
     private String startDate;
     private String endDate;
-    @Min(value = 1, message = "Nhập phải là số nguyên dương")
     private Double deposit;
 
     private Employee employee;
@@ -112,6 +109,9 @@ public class ContractDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         ContractDto contractDto = (ContractDto) target;
+        if(contractDto.getDeposit() < 0){
+            errors.rejectValue("deposit","deposit","Số tiền không được âm");
+        }
         try {
             Date format = new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.endDate);
             Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.startDate);

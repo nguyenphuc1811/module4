@@ -1,7 +1,6 @@
 package com.codegym.furama.model.employee;
 
-import com.codegym.furama.model.employee.user_role.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.codegym.furama.model.security.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

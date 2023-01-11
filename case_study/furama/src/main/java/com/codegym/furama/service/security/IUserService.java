@@ -1,6 +1,6 @@
-package com.codegym.furama.service;
+package com.codegym.furama.service.security;
 
-import com.codegym.furama.model.employee.user_role.User;
+import com.codegym.furama.model.security.User;
 
 import java.util.List;
 

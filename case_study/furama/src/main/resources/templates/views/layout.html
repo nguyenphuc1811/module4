@@ -1,51 +1,70 @@
-
-<div  th:fragment="header">
+<div th:fragment="header">
     <div class="row bg-success">
-        <div class="col-lg-10">
-            <img src="../../static/picture/logo.jpg" height="75" width="133">
+        <div class="col-lg-11">
+            <img src="../static/picture/logo.jpg" height="75" width="133">
         </div>
-        <div class="col-lg-2 ">
-            <p>Nguyễn Văn A</p>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center ">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="view/home.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Employee</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/customer">Customer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/facility">Service</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/contract">Contract</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+        <div class="col-lg-1">
+            <div class="container-fluid bg-gray-500 d-flex header">
+                <div class="container-fluid text-end">
+                    <div sec:authorize="isAuthenticated()">
+            <span style="font-size: 15px">
+                    <strong sec:authentication="principal.username"></strong>
+            </span>
+                        <a th:href="@{/logout}">
+                            <button class="btn btn-danger btn-outline-secondary text-light">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </button>
+                        </a>
+                    </div>
+                    <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
+                        <!--                <span sec:authorize="isAnonymous()" th:text="${#}"></span>-->
+                        <button class="btn btn-success btn-outline-secondary text-light">
+                            <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
-    </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center ">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="view/home.jsp">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">Employee</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/customer">Customer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/facility">Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/contract">Contract</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
 </div>
 <div th:fragment="footer" class="row" style="background-color: #addccf ;">
     <div class="col-lg-1"></div>
     <div class="col-lg-4" style="background-color:#f3f3f3">
         <h2 style="color: #cbbe73;margin-top: 30px">How to Get to Us</h2>
-        <p>Furama is a premier base for exploring one of Asia's most exciting new destinations. Just a short drive from
+        <p>Furama is a premier base for exploring one of Asia's most exciting new destinations. Just a short drive
+            from
             Danang lay four UNESCO-listed World Heritage Sites:</p>
         <h5 style="color: #cbbe73">Local Places</h5>
         <ol class="list-group list-group-numbered" style="margin-bottom: 30px">
@@ -63,7 +82,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    <div >Champa civilization, My Son</div>
+                    <div>Champa civilization, My Son</div>
                 </div>
                 <span class="badge bg-primary rounded-pill">90 minutes</span>
             </li>

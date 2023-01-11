@@ -1,6 +1,4 @@
-package com.codegym.furama.model.employee.user_role;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+package com.codegym.furama.model.security;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,21 +7,20 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "role_id") , inverseJoinColumns = @JoinColumn(name = "username"))
-    @JsonManagedReference
+
+    @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
